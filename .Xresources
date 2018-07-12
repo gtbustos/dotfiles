@@ -1,0 +1,70 @@
+*.font: xft:Inconsolata\ for\ Powerline:size=10
+!URxvt.font: xft:Hack:Inconsolata Bold:size=10
+
+URxvt*background: #101010
+*foreground: #CCCCCC
+URxvt*color0: #101010
+URxvt*color1: #960050
+URxvt*color2: #66aa11
+URxvt*color3: #c47f2c
+URxvt*color4: #30309b
+URxvt*color5: #7e40a5
+URxvt*color6: #3579a8
+URxvt*color7: #9999aa
+URxvt*color8: #303030
+URxvt*color9: #ff0090
+URxvt*color10: #80ff00
+URxvt*color11: #ffba68
+URxvt*color12: #5f5fee
+URxvt*color13: #bb88dd
+URxvt*color14: #4eb4fa
+URxvt*color15: #d0d0d0
+
+URxvt*.depth: 24
+
+Xft.dpi: 96
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+! disable scrollbar
+URxvt.scrollBar: false
+
+! set terminal border
+URxvt.internalBorder: 15
+
+! enable some extensions
+URxvt.perl-ext:             default,url-select,clipboard
+
+! set url-select
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.url-select.autocopy:  true
+URxvt.url-select.button:    2
+URxvt.url-select.launcher:  firefox
+URxvt.url-select.underline: true
+
+! copy/paste to Ctrl+Shift+C/V
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+
+! disable Ctrl+Shift 'function'
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! rofi settings
+rofi.columns: 1
+rofi.color-enabled: true
+rofi.color-window: #393939, #393939, #268bd2
+rofi.color-normal: #393939, #ffffff, #393939, #268bd2, #ffffff
+rofi.color-active: #393939, #268bd2, #393939, #268bd2, #205171
+rofi.color-urgent: #393939, #f3843d, #393939, #268bd2, #ffc39c
+rofi.location: 0
+rofi.padding: 2
+rofi.yoffset: -22
+rofi.xoffset: 0
+rofi.fixed-num-lines: true
+rofi.ssh-set-title: true
+rofi.terminal: urxvt

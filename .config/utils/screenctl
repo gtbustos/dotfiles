@@ -1,0 +1,60 @@
+#!/bin/bash
+
+#
+# this needs urgent improvements...
+#
+
+FILE="/tmp/screen_settings"
+
+function mirror_screen {
+    xrandr --output LVDS1 --mode 1366x768 --output HDMI1 --mode 1920x1080 --same-as LVDS1
+    feh --bg-scale /home/gabriel/wallpapers/'wallpaper.jpg' 
+    echo 0 > ${FILE}
+}
+
+function extend_screen {
+    xrandr --output LVDS1 --mode 1366x768 --output HDMI1 --auto --right-of LVDS1
+    feh --bg-scale /home/gabriel/wallpapers/'wallpaper.jpg'
+    echo 1 > ${FILE}
+}
+
+function main_screen {
+    xrandr --output LVDS1 --auto --output HDMI1 --off
+
+    echo 2 > ${FILE}
+}
+
+function aux_screen {
+    xrandr --output HDMI1 --mode 1920x1080 --output LVDS1 --off
+    feh --bg-scale --randomize /home/gabriel/wallpapers/fullhd/*
+
+    echo 3 > ${FILE}
+}
+
+function set() {
+    case $1 in
+	0 )
+	    extend_screen ;;
+	1 )
+	    main_screen ;;
+	2 )
+	    aux_screen ;;
+	3 )
+	    extend_screen ;;
+    esac
+}
+
+HDMI1="$(xrandr | grep HDMI1 | cut -d' ' -f 2)"
+LVDS1="$(xrandr | grep LVDS1 | cut -d' ' -f 2)"
+
+if [ ${HDMI1} == 'disconnected' ]; then
+    exit
+fi
+
+if [ ! -f ${FILE} ]; then
+    mirror_screen
+else
+    current="$(cat ${FILE})"
+    set ${current}
+fi
+
