@@ -215,7 +215,8 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 # finds out, if available)
 bar {
 #	Changed i3status for i3blocks
-	status_command py3status -c /home/gabriel/.config/i3status.conf
+#	status_command py3status -c /home/gabriel/.config/i3status.conf
+	status_command i3status -c /home/gabriel/.config/i3status.conf
 #	status_command i3blocks 
 # -c /home/gabriel/.config/i3blocks.conf
 	colors {
@@ -240,10 +241,16 @@ exec --no-startup-id "pulseaudio --start"
 bindsym $mod+Shift+x exec ~/.config/utils/lock/lock.sh -s -o ~/.config/utils/lock/lock.png -b
 # i3lock --color 475263
 
-# Volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+# Volumen & Media
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 2%+
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 2%-
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioMute exec --no-startup-id amixer -q sset Master toggle
 
 # Screens Manager (for a HDMI1 1920x1080 screen)
 bindsym $mod+Shift+s exec screenctl
@@ -273,7 +280,7 @@ bindsym XF86Display exec screenctl
 #exec --no-startup-id mpd
 
 # Print screen
-bindsym --release $mod+Print exec --no-startup-id scrot -zu
+bindsym --release Print exec scrot -s /home/gabriel/Pictures/'screenshot-%Y%m%d%I%M%S.png'
 
 # Set wallpaper with feh
 # Establecer fondo de escritorio
